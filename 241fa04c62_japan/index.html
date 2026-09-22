@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover Japan — the land of the rising sun. Immerse yourself in ancient culture, breathtaking landscapes, exquisite cuisine, and vibrant festivals.">
+  <title>Discover Japan | The Land of the Rising Sun</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Leaflet CSS for real map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Cherry Blossom Canvas (floating petals overlay) -->
+  <canvas id="sakuraCanvas"></canvas>
+
+  <!-- ===== STICKY NAVIGATION ===== -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">
+      <span class="hinomaru"></span>
+      <span class="logo-text">日本 <small>Discover Japan</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#intro">Philosophy</a>
+      <a href="#culture">Culture</a>
+      <a href="#locations">Locations</a>
+      <a href="#gastronomy">Gastronomy</a>
+      <a href="#festivals">Festivals</a>
+    </div>
+    <a href="#contact" class="nav-cta">Plan Your Journey</a>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="images/hero_fuji.png" alt="Mount Fuji at golden hour with cherry blossoms" id="heroBgImg">
+    </div>
+    <div class="hero-overlay"></div>
+
+    <!-- Decorative Hinomaru -->
+    <div class="hero-hinomaru" id="heroHinomaru"></div>
+
+    <div class="hero-content" id="heroContent">
+      <p class="hero-kanji">日出ずる国を発見する</p>
+      <h1 class="hero-title">
+        <span class="hero-line-1">Discover the</span>
+        <span class="hero-line-2">Land of the</span>
+        <span class="hero-line-3">Rising Sun</span>
+      </h1>
+      <p class="hero-tagline">Where a thousand years of tradition meets tomorrow's innovation — a journey that transforms every traveler's soul.</p>
+      <a href="#intro" class="hero-cta">
+        <span>Begin the Journey</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7.8H7.8"/></svg>
+      </a>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span class="scroll-text">Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- ===== INTRO / PHILOSOPHY ===== -->
+  <section class="intro" id="intro">
+    <div class="container">
+      <div class="intro-badge reveal-up">
+        <span class="badge-dot"></span>
+        <span>Philosophy</span>
+      </div>
+
+      <div class="intro-hero-text reveal-up">
+        <h2>Japan is not merely a <em>destination</em> — it is a feeling. A place where every season paints the world anew, where centuries-old temples stand shoulder to shoulder with <em>neon-lit towers</em></h2>
+      </div>
+
+      <div class="intro-grid">
+        <div class="intro-card glass reveal-left">
+          <img src="images/hero_fuji.png" alt="Mount Fuji with cherry blossoms">
+          <div class="intro-card-body">
+            <h3>6,852 Islands</h3>
+            <p>Japan's archipelago stretches across 3,000 km, from the frozen wilderness of Hokkaido to the tropical shores of Okinawa — each island with its own character, cuisine, and legends.</p>
+          </div>
+        </div>
+        <div class="intro-card glass reveal-up" style="transition-delay: 0.15s">
+          <img src="images/kyoto_temple.png" alt="Fushimi Inari shrine torii gates">
+          <div class="intro-card-body">
+            <h3>20+ UNESCO Sites</h3>
+            <p>From the sacred shrines of Nara to the historic villages of Shirakawa-go, Japan's cultural treasures are recognized globally as irreplaceable masterpieces of human heritage.</p>
+          </div>
+        </div>
+        <div class="intro-card glass reveal-right" style="transition-delay: 0.3s">
+          <img src="images/bamboo_forest.png" alt="Arashiyama bamboo grove">
+          <div class="intro-card-body">
+            <h3>Living Harmony</h3>
+            <p>In Japan, nature and human creation exist in perfect symbiosis. Every garden, temple, and village reflects a philosophy of harmony — wa (和) — that has guided this civilization for millennia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CULTURE SECTION ===== -->
+  <section class="culture" id="culture">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Culture</span>
+        <h2 class="section-heading">Tradition <span class="amp">&</span> Modernity</h2>
+        <p class="section-desc">Japan seamlessly weaves ancient arts with cutting-edge innovation, creating a living culture unlike anywhere else on Earth.</p>
+      </div>
+
+      <!-- Bento grid layout -->
+      <div class="culture-bento">
+        <div class="bento-item bento-large glass reveal-left">
+          <img src="images/tea_ceremony.png" alt="Japanese tea ceremony">
+          <div class="bento-overlay">
+            <span class="bento-kanji">茶道</span>
+            <h3>The Way of Tea</h3>
+            <p>Chanoyu — the Japanese tea ceremony — is a choreographed ritual of respect, harmony, purity, and tranquility. Every gesture, every placement of a utensil carries meaning passed down through generations. It is a philosophical art form that transforms the simple act of drinking tea into a meditation on beauty and impermanence.</p>
+          </div>
+        </div>
+
+        <div class="bento-item glass reveal-up" style="transition-delay:0.1s">
+          <img src="images/zen_garden.png" alt="Japanese zen garden">
+          <div class="bento-overlay">
+            <span class="bento-kanji">禅</span>
+            <h3>Zen & Mindfulness</h3>
+            <p>Raked gravel, moss-covered stones, and perfect silence — Japanese zen gardens are meditative landscapes that embody the wabi-sabi aesthetic: beauty in imperfection and impermanence.</p>
+          </div>
+        </div>
+
+        <div class="bento-item glass reveal-up" style="transition-delay:0.2s">
+          <img src="images/calligraphy.png" alt="Japanese calligraphy">
+          <div class="bento-overlay">
+            <span class="bento-kanji">書道</span>
+            <h3>Calligraphy</h3>
+            <p>Shodō — the way of writing — transforms ink and brush into an expressive art. Each stroke captures the artist's breath, emotion, and years of disciplined practice.</p>
+          </div>
+        </div>
+
+        <div class="bento-item glass reveal-right" style="transition-delay:0.15s">
+          <img src="images/geisha_district.png" alt="Geisha in Gion district">
+          <div class="bento-overlay">
+            <span class="bento-kanji">芸者</span>
+            <h3>Geisha Tradition</h3>
+            <p>In the lantern-lit streets of Gion, geiko and maiko preserve centuries of performing arts — from classical dance to shamisen music. Their dedication to beauty and artistry is unmatched, requiring years of rigorous training in Kyoto's ochaya teahouses.</p>
+          </div>
+        </div>
+
+        <div class="bento-item glass reveal-up" style="transition-delay:0.25s">
+          <img src="images/onsen_hotspring.png" alt="Japanese onsen hot spring">
+          <div class="bento-overlay">
+            <span class="bento-kanji">温泉</span>
+            <h3>Onsen Culture</h3>
+            <p>With over 27,000 natural hot springs across the country, onsen bathing is a sacred Japanese tradition. These mineral-rich thermal waters promise both physical healing and spiritual renewal amidst breathtaking natural settings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LOCATIONS SECTION ===== -->
+  <section class="locations" id="locations">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Destinations</span>
+        <h2 class="section-heading">Iconic <span class="amp">Locations</span></h2>
+        <p class="section-desc">From ancient capitals to futuristic metropolises, from snow-capped peaks to subtropical beaches — Japan's diversity is breathtaking.</p>
+      </div>
+
+      <div class="locations-cards">
+        <!-- Tokyo -->
+        <div class="loc-card glass reveal-up">
+          <div class="loc-card-img">
+            <img src="images/tokyo_thumbnail.png" alt="Tokyo Tower at night">
+            <span class="loc-badge">Metropolis</span>
+          </div>
+          <div class="loc-card-body">
+            <h3>Tokyo</h3>
+            <p>The world's largest metropolis — a staggering collision of neon-lit skyscrapers, ancient shrines, and Michelin-starred restaurants. From Shibuya's famous crossing to the serene Meiji Shrine, Tokyo pulses with limitless energy. Explore Akihabara's anime wonderland, witness the Tsukiji fish market at dawn, and gaze at the city lights from the observation deck of Tokyo Skytree.</p>
+            <div class="loc-highlights">
+              <span>🏙️ Shibuya Crossing</span>
+              <span>⛩️ Meiji Shrine</span>
+              <span>🗼 Tokyo Tower</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kyoto -->
+        <div class="loc-card glass reveal-up" style="transition-delay:0.12s">
+          <div class="loc-card-img">
+            <img src="images/kyoto_thumbnail.png" alt="Kinkaku-ji Golden Pavilion">
+            <span class="loc-badge">Cultural Heart</span>
+          </div>
+          <div class="loc-card-body">
+            <h3>Kyoto</h3>
+            <p>Japan's ancient capital for over a millennium, Kyoto is home to 2,000+ temples and shrines. Walk through the 10,000 vermilion torii gates of Fushimi Inari, marvel at the golden Kinkaku-ji reflecting in still waters, and discover geisha gliding through the wooden lanes of Gion at dusk. The Arashiyama bamboo grove whispers secrets of centuries past.</p>
+            <div class="loc-highlights">
+              <span>⛩️ Fushimi Inari</span>
+              <span>🏯 Kinkaku-ji</span>
+              <span>🎋 Arashiyama</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Osaka -->
+        <div class="loc-card glass reveal-up" style="transition-delay:0.24s">
+          <div class="loc-card-img">
+            <img src="images/osaka_thumbnail.png" alt="Osaka Castle in cherry blossom season">
+            <span class="loc-badge">Culinary Capital</span>
+          </div>
+          <div class="loc-card-body">
+            <h3>Osaka</h3>
+            <p>Known as "Japan's Kitchen," Osaka is a city that lives to eat. From the neon-drenched canals of Dotonbori to the stately Osaka Castle, this is where street food culture reaches its zenith. Takoyaki, okonomiyaki, and kushikatsu reign supreme. Osakans are known for their warmth, humor, and insatiable appetite for life's pleasures.</p>
+            <div class="loc-highlights">
+              <span>🍢 Dotonbori</span>
+              <span>🏯 Osaka Castle</span>
+              <span>🦑 Street Food</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Himeji -->
+        <div class="loc-card glass reveal-up" style="transition-delay:0.36s">
+          <div class="loc-card-img">
+            <img src="images/castle_himeji.png" alt="Himeji Castle">
+            <span class="loc-badge">Heritage</span>
+          </div>
+          <div class="loc-card-body">
+            <h3>Himeji</h3>
+            <p>The "White Heron Castle" of Himeji is Japan's most spectacular feudal castle and a UNESCO World Heritage Site. Its soaring white walls and intricate defensive architecture have survived wars, earthquakes, and over 400 years of time. Surrounded by cherry trees that bloom magnificently each spring, it is a symbol of Japan's enduring elegance.</p>
+            <div class="loc-highlights">
+              <span>🏯 White Heron Castle</span>
+              <span>🌸 Cherry Blossoms</span>
+              <span>📜 UNESCO Site</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REAL INTERACTIVE MAP -->
+      <div class="map-section reveal-up">
+        <h3 class="map-title">Explore the Map</h3>
+        <p class="map-desc">Discover Japan's iconic destinations on the interactive map below</p>
+        <div id="japanMap" class="japan-map-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GASTRONOMY SECTION ===== -->
+  <section class="gastronomy" id="gastronomy">
+    <div class="container">
+      <div class="gastro-split">
+        <div class="gastro-left reveal-left">
+          <span class="section-tag">Gastronomy</span>
+          <h2 class="section-heading">A Culinary<br>Journey Like<br><em>No Other</em></h2>
+          <p class="gastro-desc">Japanese cuisine is a UNESCO Intangible Cultural Heritage — and for good reason. It is a philosophy of seasonal ingredients, meticulous presentation, and deep respect for the natural flavor of each element. Every dish tells a story of the land, the season, and the artisan's soul.</p>
+          <div class="gastro-facts">
+            <div class="gastro-fact">
+              <span class="fact-num">160,000+</span>
+              <span class="fact-label">Restaurants in Tokyo alone</span>
+            </div>
+            <div class="gastro-fact">
+              <span class="fact-num">234</span>
+              <span class="fact-label">Michelin Stars in Tokyo</span>
+            </div>
+          </div>
+        </div>
+        <div class="gastro-right">
+          <div class="food-mosaic">
+            <div class="food-tile food-tile-tall glass reveal-right">
+              <img src="images/sushi_platter.png" alt="Premium Japanese sushi platter">
+              <div class="food-tile-info">
+                <span class="food-kanji">寿司</span>
+                <h4>Sushi & Sashimi</h4>
+                <p>The pinnacle of Japanese culinary art — fresh fish, perfectly seasoned rice, and decades of mastery in every single bite. From conveyor-belt kaiten to Jiro's legendary counter.</p>
+              </div>
+            </div>
+            <div class="food-tile glass reveal-right" style="transition-delay:0.15s">
+              <img src="images/ramen_bowl.png" alt="Authentic tonkotsu ramen bowl">
+              <div class="food-tile-info">
+                <span class="food-kanji">拉麺</span>
+                <h4>Ramen</h4>
+                <p>Soul-warming broth simmered for 12+ hours. Tonkotsu, shoyu, miso, shio — each region claims its recipe is the best.</p>
+              </div>
+            </div>
+            <div class="food-tile glass reveal-right" style="transition-delay:0.3s">
+              <img src="images/street_food.png" alt="Japanese street food - takoyaki">
+              <div class="food-tile-info">
+                <span class="food-kanji">屋台</span>
+                <h4>Street Food</h4>
+                <p>Golden takoyaki, crispy tempura, yakitori on charcoal — Japan's yatai stalls are a festival of flavors at every corner.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FESTIVALS SECTION ===== -->
+  <section class="festivals" id="festivals">
+    <div class="festivals-bg">
+      <img src="images/matsuri_festival.png" alt="Japanese matsuri festival" id="festivalBg">
+    </div>
+    <div class="festivals-overlay"></div>
+    <div class="container festivals-content">
+      <div class="festivals-header reveal-up">
+        <span class="section-tag light">Festivals</span>
+        <h2 class="section-heading light">Matsuri: The Heartbeat of <em>Japan</em></h2>
+        <p class="section-desc light">Throughout the year, Japan erupts in color, music, and celebration. Matsuri festivals are the soul of Japanese community life — ancient traditions that make the spirits dance and the lanterns glow.</p>
+      </div>
+
+      <div class="seasons-grid">
+        <div class="season-card glass-dark reveal-up">
+          <div class="season-icon">🌸</div>
+          <span class="season-name">Spring</span>
+          <h4>Hanami</h4>
+          <p>Cherry blossom viewing — millions gather beneath sakura clouds for picnics, poetry, and fleeting beauty. The entire nation celebrates the arrival of spring.</p>
+        </div>
+        <div class="season-card glass-dark reveal-up" style="transition-delay:0.1s">
+          <div class="season-icon">🎆</div>
+          <span class="season-name">Summer</span>
+          <h4>Gion Matsuri</h4>
+          <p>Kyoto's month-long grand festival features towering yamaboko floats, traditional music, and spectacular fireworks that illuminate summer nights.</p>
+        </div>
+        <div class="season-card glass-dark reveal-up" style="transition-delay:0.2s">
+          <div class="season-icon">🍁</div>
+          <span class="season-name">Autumn</span>
+          <h4>Momijigari</h4>
+          <p>Autumn leaf hunting — mountains and temple gardens ignite in crimson, amber, and gold. Japan celebrates the beauty of impermanence: mono no aware.</p>
+        </div>
+        <div class="season-card glass-dark reveal-up" style="transition-delay:0.3s">
+          <div class="season-icon">❄️</div>
+          <span class="season-name">Winter</span>
+          <h4>Sapporo Snow Festival</h4>
+          <p>Massive, intricate ice sculptures transform Hokkaido into a frozen wonderland of light, artistry, and wonder. Over 2 million visitors attend each year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CHERRY BLOSSOM VIDEO SECTION ===== -->
+  <section class="video-section" id="video">
+    <div class="container">
+      <div class="video-header reveal-up">
+        <h2 class="section-heading">Experience the <em>Beauty</em></h2>
+        <p class="section-desc">Immerse yourself in the ethereal beauty of Japan's cherry blossom season</p>
+      </div>
+      <div class="video-wrapper reveal-up">
+        <video autoplay loop muted playsinline class="sakura-video">
+          <source src="videos/cherry.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-glass-overlay">
+          <span class="video-kanji">桜</span>
+          <h3>Cherry Blossom Season</h3>
+          <p>Every spring, Japan transforms into a dreamscape of soft pink and white as millions of cherry trees bloom simultaneously across the nation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-wrapper glass reveal-up">
+        <div class="contact-left">
+          <span class="section-tag">Contact</span>
+          <h2 class="section-heading">Begin Your<br>Japanese <em>Dream</em></h2>
+          <p class="contact-desc">Share your vision and let us help you discover the magic of Japan. Every great journey begins with a single step.</p>
+          <div class="contact-info-list">
+            <div class="contact-info-item">
+              <div class="info-icon">📧</div>
+              <div>
+                <span class="info-label">Email</span>
+                <span class="info-value">vu.241fa04c62@gmail.com</span>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="info-icon">📍</div>
+              <div>
+                <span class="info-label">Location</span>
+                <span class="info-value">Tokyo, Japan</span>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="info-icon">🕐</div>
+              <div>
+                <span class="info-label">Response Time</span>
+                <span class="info-value">Within 24 hours</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-right">
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" placeholder="Your full name" required>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" placeholder="your@email.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Dream Destination</label>
+              <input type="text" placeholder="e.g., Kyoto temples, Tokyo nightlife...">
+            </div>
+            <div class="form-group">
+              <label>Your Vision</label>
+              <textarea placeholder="Tell us about your dream Japan experience..." rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn-submit">
+              <span>Send Message</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#hero" class="footer-logo">
+            <span class="hinomaru"></span>
+            <span>Discover Japan</span>
+          </a>
+          <p class="footer-desc">Curating unforgettable Japanese experiences since the heart first dreamed of cherry blossoms.</p>
+        </div>
+        <div class="footer-links-col">
+          <h4>Explore</h4>
+          <a href="#intro">Philosophy</a>
+          <a href="#culture">Culture</a>
+          <a href="#locations">Locations</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>Discover</h4>
+          <a href="#gastronomy">Gastronomy</a>
+          <a href="#festivals">Festivals</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-social-col">
+          <h4>Follow Us</h4>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram">IG</a>
+            <a href="#" aria-label="YouTube">YT</a>
+            <a href="#" aria-label="Twitter">X</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Discover Japan. Crafted with 和 (harmony).</p>
+        <p class="footer-kanji">和美静 — Harmony · Beauty · Serenity</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS for real map -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
